@@ -1,17 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <unattend xmlns="urn:schemas-microsoft-com:unattend" xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
-	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Unattended&UILanguage=de-DE&UserLocale=de-DE&KeyboardLayout=0407%3A00000407&GeoLocation=94&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=W.+Europe+Standard+Time&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1000&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Unattended&AccountName0=Admin&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&EnableLongPaths=true&WifiMode=Interactive&ExpressSettings=DisableAll&WdacMode=Skip-->
+	<!--https://schneegans.de/windows/unattend-generator/?LanguageMode=Interactive&ProcessorArchitecture=amd64&BypassRequirementsCheck=true&BypassNetworkCheck=true&ComputerNameMode=Random&TimeZoneMode=Explicit&TimeZone=W.+Europe+Standard+Time&PartitionMode=Unattended&PartitionLayout=GPT&EspSize=300&RecoveryMode=Partition&RecoverySize=1000&WindowsEditionMode=Unattended&WindowsEdition=pro&UserAccountMode=Unattended&AccountName0=Admin&AccountPassword0=&AccountGroup0=Administrators&AutoLogonMode=Own&PasswordExpirationMode=Unlimited&LockoutMode=Default&EnableLongPaths=true&WifiMode=Interactive&ExpressSettings=DisableAll&SystemScript0=%23System+context+script+1%0D%0A%0D%0A%23+Disable+Hibernation+and+Fastboot%0D%0Apowercfg+-h+off%0D%0AREG+ADD+%22HKLM%5CSYSTEM%5CCurrentControlSet%5CControl%5CSession+Manager%5CPower%22+%2FV+HiberbootEnabled+%2FT+REG_dWORD+%2FD+0+%2FF%0D%0A%0D%0A%23+Disable+HDCP%0D%0Areg.exe+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5CControl%5CClass%5C%7B4d36e968-e325-11ce-bfc1-08002be10318%7D%5C0000%22+%2Fv+RMHdcpKeyglobZero+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0A%0D%0A%23+Enable+verbose+system+messages%0D%0Areg.exe+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CPolicies%5CSystem%22+%2Fv+verbosestatus+%2Ft+REG_DWORD+%2Fd+1+%2Ff&SystemScriptType0=Cmd&SystemScript1=%23System+context+script+2%0D%0A&SystemScriptType1=Cmd&SystemScript2=%23System+context+script+3%0D%0A&SystemScriptType2=Ps1&SystemScript3=%23System+context+script+4&SystemScriptType3=Vbs&FirstLogonScript0=%23+First+user+logon+script+%231%0D%0A%0D%0A%23Import+default+power+schemes%0D%0Apowercfg+%2FSETACVALUEINDEX+381b4222-f694-41f0-9685-ff5bb260df2e+2a737441-1930-4402-8d77-b2bebba308a3+48e6b7a6-50f5-4782-a5d4-53bb8f07e226+0%0D%0Apowercfg+-duplicatescheme+a1841308-3541-4fab-bc81-f71556f20b4a%0D%0Apowercfg+-duplicatescheme+381b4222-f694-41f0-9685-ff5bb260df2e%0D%0Apowercfg+-duplicatescheme+8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c%0D%0Apowercfg+-duplicatescheme+e9a42b02-d5df-448d-aa00-03f14749eb61%0D%0A%0D%0A%23+Aktivieren+der+.NET+Framework+Features%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+NetFx3+-All%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+NetFx4+-All%0D%0A%0D%0A%23+Aktivieren+der+NFS+Features%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+ServicesForNFS-ClientOnly+-All%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+ClientForNFS-Infrastructure+-All%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+NFS-Administration+-All%0D%0A%0D%0A%23+Aktivieren+der+Legacy+Features%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+DirectPlay+-All%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+LegacyComponents+-All%0D%0A%0D%0A%23+Aktivieren+des+Windows+Media+Players%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+WindowsMediaPlayer+-All%0D%0AEnable-WindowsOptionalFeature+-Online+-FeatureName+MediaPlayback+-All&FirstLogonScriptType0=Ps1&FirstLogonScript1=%23+First+user+logon+script+%232%0D%0A%0D%0A%0D%0A%23%23+Copy+all+scripts%0D%0A%23%23+Set+the+desktop+path+for+the+current+user%0D%0A%23%24desktopPath+%3D+%5BSystem.IO.Path%5D%3A%3ACombine%28%24env%3AUserProfile%2C+%27Desktop%27%29%0D%0A%23%0D%0A%23%23+Check+if+the+desktop+directory+exists%2C+if+not%2C+create+it%0D%0A%23if+%28-not+%28Test-Path+-Path+%24desktopPath%29%29+%7B%0D%0A%23++++New-Item+-Path+%24desktopPath+-ItemType+Directory+%7C+Out-Null%0D%0A%23%7D%0D%0A%23%0D%0A%23%23+Define+the+URLs+and+the+corresponding+file+names%0D%0A%23%24scriptLinks+%3D+%40%7B%0D%0A%23++++%22Windows+Update+Script.lnk%22+%3D+%22https%3A%2F%2Fgithub.com%2FBladeage%2FScript-collection%2Fraw%2Fmain%2FWindows%2520Update%2520Script.lnk%22%0D%0A%23++++%22Activate+Windows-Office.lnk%22+%3D+%22https%3A%2F%2Fgithub.com%2FBladeage%2FScript-collection%2Fraw%2Fmain%2FMassgraves%2520Windows%2520Activation%2520Script.lnk%22%0D%0A%23++++%22GamingAIO.lnk%22+%3D+%22https%3A%2F%2Fgithub.com%2FBladeage%2FScript-collection%2Fraw%2Fmain%2FGamingAIO%2520-%2520bladeage.lnk%22%0D%0A%23++++%22WinUtil.lnk%22+%3D+%22https%3A%2F%2Fgithub.com%2FBladeage%2FScript-collection%2Fraw%2Fmain%2FChrisTitus%27%2520WinUtil%2520Script.lnk%22%0D%0A%23++++%22Office+Plus.lnk%22+%3D+%22https%3A%2F%2Fgithub.com%2FBladeage%2FScript-collection%2Fraw%2Fmain%2FOffice%2520Plus%2520Script.lnk%22%0D%0A%23%7D%0D%0A%23%0D%0A%23+Download+each+script+link+and+save+it+to+the+desktop%0D%0A%23foreach+%28%24fileName+in+%24scriptLinks.Keys%29+%7B%0D%0A%23++++%24url+%3D+%24scriptLinks%5B%24fileName%5D%0D%0A%23++++%24outFile+%3D+%5BSystem.IO.Path%5D%3A%3ACombine%28%24desktopPath%2C+%24fileName%29%0D%0A%23++++Invoke-WebRequest+-Uri+%24url+-OutFile+%24outFile%0D%0A%23%7D&FirstLogonScriptType1=Ps1&FirstLogonScript2=%23+First+user+logon+script+%233%0D%0A&FirstLogonScriptType2=Ps1&FirstLogonScript3=%23+First+user+logon+script+%234&FirstLogonScriptType3=Ps1&UserOnceScript0=%23+Every+users+login+script+%231%0D%0A%0D%0A%0D%0A%23+Disable+Search+Features%0D%0Areg.exe+add+%22HKU%5CDefaultUser%5CSoftware%5CPolicies%5CMicrosoft%5CWindows%5CExplorer%22+%2Fv+%22DisableSearchBoxSuggestions%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0Areg.exe+add+%22HKU%5CDefaultUser%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CSearch%22+%2Fv+BingSearchEnabled+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0A%0D%0A%23+Hide+Taskbar+Stuff%0D%0Areg.exe+add+%22HKU%5CDefaultUser%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CExplorer%5CAdvanced%22+%2Fv+%22ShowTaskViewButton%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg.exe+add+%22HKU%5CDefaultUser%5CSOFTWARE%5CMicrosoft%5CWindows%5CCurrentVersion%5CSearch%22+%2Fv+%22SearchboxTaskbarMode%22+%2Ft+REG_DWORD+%2Fd+0+%2Ff%0D%0Areg.exe+add+%22HKU%5CDefaultUser%5CSoftware%5CMicrosoft%5CWindows%5CCurrentVersion%5CPolicies%5CExplorer%22+%2Fv+%22HideSCAMeetNow%22+%2Ft+REG_DWORD+%2Fd+1+%2Ff%0D%0A%0D%0A%23+Enable+Device+Maintenance%0D%0Areg.exe+add+%22HKLM%5CSOFTWARE%5CMicrosoft%5CWindows+NT%5CCurrentVersion%5CSchedule%5CMaintenance%22+%2Fv+%22MaintenanceDisabled%22+%2Ft+%22REG_DWORD%22+%2Fd+%220%22+%2Ff%0D%0A%0D%0A%23+Network+Stuff%0D%0Areg.exe+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5Cservices%5CDnscache%5CParameters%22+%2Fv+%22MaxNegativeCacheTtl%22+%2Ft+%22REG_DWORD%22+%2Fd+%220%22+%2Ff%0D%0Areg.exe+add+%22HKLM%5CSYSTEM%5CCurrentControlSet%5Cservices%5CDnscache%5CParameters%22+%2Fv+%22MaxCacheTtl%22+%2Ft+%22REG_DWORD%22+%2Fd+%221%22+%2Ff&UserOnceScriptType0=Cmd&UserOnceScript1=%23+Every+users+login+script+%232%0D%0A%0D%0Awinget+upgrade+%2D%2Daccept-package-agreements+%2D%2Daccept-source-agreements+%2D%2Dall+%2D%2Dinclude-unknown+%2D%2Dsilent&UserOnceScriptType1=Ps1&UserOnceScript2=%23+Every+users+login+script+%233&UserOnceScriptType2=Reg&UserOnceScript3=%23+Every+users+login+script+%234&UserOnceScriptType3=Vbs&WdacMode=Skip-->
 	<settings pass="offlineServicing"></settings>
 	<settings pass="windowsPE">
-		<component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<SetupUILanguage>
-				<UILanguage>de-DE</UILanguage>
-			</SetupUILanguage>
-			<InputLocale>0407:00000407</InputLocale>
-			<SystemLocale>de-DE</SystemLocale>
-			<UILanguage>de-DE</UILanguage>
-			<UserLocale>de-DE</UserLocale>
-		</component>
 		<component name="Microsoft-Windows-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<ImageInstall>
 				<OSImage>
@@ -127,6 +118,74 @@
 					<Order>3</Order>
 					<Path>reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\FileSystem" /v LongPathsEnabled /t REG_DWORD /d 1 /f</Path>
 				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<Path>powershell.exe -NoProfile -Command "$xml = [xml]::new(); $xml.Load('C:\Windows\Panther\unattend.xml'); $sb = [scriptblock]::Create( $xml.unattend.Extensions.ExtractScript ); Invoke-Command -ScriptBlock $sb -ArgumentList $xml;"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<Path>cmd.exe /c "C:\Windows\Setup\Scripts\unattend-01.cmd &gt;&gt;"C:\Windows\Setup\Scripts\unattend-01.log" 2&gt;&amp;1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>6</Order>
+					<Path>cmd.exe /c "C:\Windows\Setup\Scripts\unattend-02.cmd &gt;&gt;"C:\Windows\Setup\Scripts\unattend-02.log" 2&gt;&amp;1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>7</Order>
+					<Path>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-03.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-03.log" 2&gt;&amp;1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>8</Order>
+					<Path>cmd.exe /c "cscript.exe //E:vbscript "C:\Windows\Setup\Scripts\unattend-04.vbs" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-04.log" 2&gt;&amp;1"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>9</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>10</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Runonce" /v "unattend-09" /t REG_SZ /d "C:\Windows\Setup\Scripts\unattend-09.cmd" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>11</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>12</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>13</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Runonce" /v "unattend-0a" /t REG_SZ /d "powershell.exe -NoProfile -Command \"Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-0a.ps1' -Raw | Invoke-Expression;\"" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>14</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Runonce" /v "unattend-0b" /t REG_SZ /d "reg.exe import \"C:\Windows\Setup\Scripts\unattend-0b.reg\"" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>reg.exe load "HKU\DefaultUser" "C:\Users\Default\NTUSER.DAT"</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>19</Order>
+					<Path>reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Runonce" /v "unattend-0c" /t REG_SZ /d "cscript.exe //E:vbscript \"C:\Windows\Setup\Scripts\unattend-0c.vbs\"" /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>20</Order>
+					<Path>reg.exe unload "HKU\DefaultUser"</Path>
+				</RunSynchronousCommand>
 			</RunSynchronous>
 		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
@@ -136,12 +195,6 @@
 	<settings pass="auditSystem"></settings>
 	<settings pass="auditUser"></settings>
 	<settings pass="oobeSystem">
-		<component name="Microsoft-Windows-International-Core" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
-			<InputLocale>0407:00000407</InputLocale>
-			<SystemLocale>de-DE</SystemLocale>
-			<UILanguage>de-DE</UILanguage>
-			<UserLocale>de-DE</UserLocale>
-		</component>
 		<component name="Microsoft-Windows-Shell-Setup" processorArchitecture="amd64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
 			<UserAccounts>
 				<LocalAccounts>
@@ -174,7 +227,163 @@
 					<Order>1</Order>
 					<CommandLine>reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon" /v AutoLogonCount /t REG_DWORD /d 0 /f</CommandLine>
 				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>2</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-05.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-05.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>3</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-06.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-06.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>4</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-07.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-07.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
+				<SynchronousCommand wcm:action="add">
+					<Order>5</Order>
+					<CommandLine>cmd.exe /c "powershell.exe -NoProfile -Command "Get-Content -LiteralPath 'C:\Windows\Setup\Scripts\unattend-08.ps1' -Raw | Invoke-Expression;" &gt;&gt;"C:\Windows\Setup\Scripts\unattend-08.log" 2&gt;&amp;1"</CommandLine>
+				</SynchronousCommand>
 			</FirstLogonCommands>
 		</component>
 	</settings>
+	<Extensions xmlns="https://schneegans.de/windows/unattend-generator/">
+		<ExtractScript>
+param(
+    [xml] $Document
+);
+
+$scriptsDir = 'C:\Windows\Setup\Scripts\';
+foreach( $file in $Document.unattend.Extensions.File ) {
+    $path = [System.Environment]::ExpandEnvironmentVariables(
+        $file.GetAttribute( 'path' )
+    );
+    if( $path.StartsWith( $scriptsDir ) ) {
+        mkdir -Path $scriptsDir -ErrorAction 'SilentlyContinue';
+    }
+    $encoding = switch( [System.IO.Path]::GetExtension( $path ) ) {
+        { $_ -in '.ps1', '.xml' } { [System.Text.Encoding]::UTF8; }
+        { $_ -in '.reg', '.vbs', '.js' } { [System.Text.UnicodeEncoding]::new( $false, $true ); }
+        default { [System.Text.Encoding]::Default; }
+    };
+    [System.IO.File]::WriteAllBytes( $path, ( $encoding.GetPreamble() + $encoding.GetBytes( $file.InnerText.Trim() ) ) );
+}
+		</ExtractScript>
+		<File path="C:\Windows\Setup\Scripts\unattend-01.cmd">
+#System context script 1
+
+# Disable Hibernation and Fastboot
+powercfg -h off
+REG ADD "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /V HiberbootEnabled /T REG_dWORD /D 0 /F
+
+# Disable HDCP
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e968-e325-11ce-bfc1-08002be10318}\0000" /v RMHdcpKeyglobZero /t REG_DWORD /d 1 /f
+
+# Enable verbose system messages
+reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v verbosestatus /t REG_DWORD /d 1 /f
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-02.cmd">
+#System context script 2
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-03.ps1">
+#System context script 3
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-04.vbs">
+#System context script 4
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-05.ps1">
+# First user logon script #1
+
+#Import default power schemes
+powercfg /SETACVALUEINDEX 381b4222-f694-41f0-9685-ff5bb260df2e 2a737441-1930-4402-8d77-b2bebba308a3 48e6b7a6-50f5-4782-a5d4-53bb8f07e226 0
+powercfg -duplicatescheme a1841308-3541-4fab-bc81-f71556f20b4a
+powercfg -duplicatescheme 381b4222-f694-41f0-9685-ff5bb260df2e
+powercfg -duplicatescheme 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c
+powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61
+
+# Aktivieren der .NET Framework Features
+Enable-WindowsOptionalFeature -Online -FeatureName NetFx3 -All
+Enable-WindowsOptionalFeature -Online -FeatureName NetFx4 -All
+
+# Aktivieren der NFS Features
+Enable-WindowsOptionalFeature -Online -FeatureName ServicesForNFS-ClientOnly -All
+Enable-WindowsOptionalFeature -Online -FeatureName ClientForNFS-Infrastructure -All
+Enable-WindowsOptionalFeature -Online -FeatureName NFS-Administration -All
+
+# Aktivieren der Legacy Features
+Enable-WindowsOptionalFeature -Online -FeatureName DirectPlay -All
+Enable-WindowsOptionalFeature -Online -FeatureName LegacyComponents -All
+
+# Aktivieren des Windows Media Players
+Enable-WindowsOptionalFeature -Online -FeatureName WindowsMediaPlayer -All
+Enable-WindowsOptionalFeature -Online -FeatureName MediaPlayback -All
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-06.ps1">
+# First user logon script #2
+
+
+## Copy all scripts
+## Set the desktop path for the current user
+#$desktopPath = [System.IO.Path]::Combine($env:UserProfile, 'Desktop')
+#
+## Check if the desktop directory exists, if not, create it
+#if (-not (Test-Path -Path $desktopPath)) {
+#    New-Item -Path $desktopPath -ItemType Directory | Out-Null
+#}
+#
+## Define the URLs and the corresponding file names
+#$scriptLinks = @{
+#    "Windows Update Script.lnk" = "https://github.com/Bladeage/Script-collection/raw/main/Windows%20Update%20Script.lnk"
+#    "Activate Windows-Office.lnk" = "https://github.com/Bladeage/Script-collection/raw/main/Massgraves%20Windows%20Activation%20Script.lnk"
+#    "GamingAIO.lnk" = "https://github.com/Bladeage/Script-collection/raw/main/GamingAIO%20-%20bladeage.lnk"
+#    "WinUtil.lnk" = "https://github.com/Bladeage/Script-collection/raw/main/ChrisTitus'%20WinUtil%20Script.lnk"
+#    "Office Plus.lnk" = "https://github.com/Bladeage/Script-collection/raw/main/Office%20Plus%20Script.lnk"
+#}
+#
+# Download each script link and save it to the desktop
+#foreach ($fileName in $scriptLinks.Keys) {
+#    $url = $scriptLinks[$fileName]
+#    $outFile = [System.IO.Path]::Combine($desktopPath, $fileName)
+#    Invoke-WebRequest -Uri $url -OutFile $outFile
+#}
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-07.ps1">
+# First user logon script #3
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-08.ps1">
+# First user logon script #4
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-09.cmd">
+# Every users login script #1
+
+
+# Disable Search Features
+reg.exe add "HKU\DefaultUser\Software\Policies\Microsoft\Windows\Explorer" /v "DisableSearchBoxSuggestions" /t REG_DWORD /d 1 /f
+reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Search" /v BingSearchEnabled /t REG_DWORD /d 0 /f
+
+# Hide Taskbar Stuff
+reg.exe add "HKU\DefaultUser\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d 0 /f
+reg.exe add "HKU\DefaultUser\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d 0 /f
+reg.exe add "HKU\DefaultUser\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer" /v "HideSCAMeetNow" /t REG_DWORD /d 1 /f
+
+# Enable Device Maintenance
+reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Schedule\Maintenance" /v "MaintenanceDisabled" /t "REG_DWORD" /d "0" /f
+
+# Network Stuff
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxNegativeCacheTtl" /t "REG_DWORD" /d "0" /f
+reg.exe add "HKLM\SYSTEM\CurrentControlSet\services\Dnscache\Parameters" /v "MaxCacheTtl" /t "REG_DWORD" /d "1" /f
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-0a.ps1">
+# Every users login script #2
+
+winget upgrade --accept-package-agreements --accept-source-agreements --all --include-unknown --silent
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-0b.reg">
+Windows Registry Editor Version 5.00
+
+# Every users login script #3
+		</File>
+		<File path="C:\Windows\Setup\Scripts\unattend-0c.vbs">
+# Every users login script #4
+		</File>
+	</Extensions>
 </unattend>
